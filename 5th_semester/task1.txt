@@ -1,0 +1,51 @@
+/*
+Task 
+14. Заданы два массива А(5) и В(5). В каждом из массивов найти наименьшее значение и умножить на него все элементы массивов. На печать вывести исходные и преобразованные массивы.
+*/
+
+//variables
+int a = 10;
+int b = 10;
+int *A = new int[a];
+int *B = new int[b];   
+
+int minValueA = 0;
+int minValueB = 0;
+//input massives
+for(i=0;i<A.length;i++){
+	print(A[i]);
+} 
+
+for(i=0;i<B.length;i++){
+	print(B[i]);
+} 
+
+//find min value of each massive
+for(i=0;i<A.length;i++){
+	if(A[i]<minValueA){
+		minValueA = A[i];
+	}
+} 
+
+for(i=0;i<B.length;i++){
+	if(B[i]<minValueB){
+		minValueB = B[i];
+	}
+} 
+
+//multiply each massive value on min value
+for(i=0;i<A.length;i++){
+	A[i] *= minValueA ;
+} 
+
+for(i=0;i<B.length;i++){
+	B[i] *= minValueB ;
+} 
+//output massives
+for(i=0;i<A.length;i++){
+	print(A[i]);
+} 
+
+for(i=0;i<B.length;i++){
+	print(B[i]);
+} 
