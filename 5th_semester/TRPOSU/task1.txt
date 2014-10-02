@@ -4,35 +4,53 @@ using namespace std;
 
 # include  <conio.h>
 
+
+
 /*
 
 Task1
 
 14. Заданы два массива А(5) и В(5). В каждом из массивов найти наименьшее значение и умножить на него все элементы массивов. На печать вывести исходные и преобразованные массивы.
 
+
+
 */
+
+int enterInt(){
+
+    int i;
+
+    do{
+
+        cin>>i;
+
+        if(i==0){cin.clear();cin.ignore();}
+
+    }
+
+    while(i == 0);
+
+    return i;
+
+}
+
+
 
 int main(){
 
+
+
     //variables
 
-    int a = 0;
+    cout<<"Enter the elements number of array A(>5): ";
 
-    int b = 0;
-
-
-
-	cout<<"Vvedite chislo elementov massiva A: ";
-
-	cin>>a;
+    int a=enterInt();
 
 
 
+    cout<<"Enter the elements number of array B(>5): ";
 
-
-    cout<<"Vvedite chislo elementov massiva B: ";
-
-    cin>>b;
+    int b=enterInt();
 
 
 
@@ -44,13 +62,13 @@ int main(){
 
     //input massives
 
+
+
     for(int i=0; i<a;i++){
 
         cout<<"Vvedite A["<<i<<"] = ";
 
         cin>>A[i];
-
-
 
     }
 
@@ -61,8 +79,6 @@ int main(){
         cout<<"Vvedite B["<<i<<"] = ";
 
         cin>>B[i];
-
-
 
     }
 
@@ -75,6 +91,8 @@ int main(){
 
 
     //output old massives
+
+
 
     cout<<"Old values of massives:"<<endl;
 
@@ -137,6 +155,8 @@ int main(){
         B[i] *= minValueB ;
 
     }
+
+
 
     //output massives
 
