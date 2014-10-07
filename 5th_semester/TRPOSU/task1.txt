@@ -4,6 +4,10 @@ using namespace std;
 
 # include  <conio.h>
 
+#include <string>
+
+#include <cmath>
+
 
 
 /*
@@ -16,7 +20,7 @@ Task1
 
 */
 
-int enterInt(){
+int readSizeOfArrayInt(){
 
     int i;
 
@@ -24,13 +28,71 @@ int enterInt(){
 
         cin>>i;
 
-        if(i==0){cin.clear();cin.ignore();}
+        if(i==0 || i<0){cin.clear();cin.ignore();}
 
     }
 
-    while(i == 0);
+    while(i == 0 || i<0);
 
-    return i;
+    return abs(i);
+
+}
+
+
+
+void readElementOfArray(int sizeOfArray, int * pointer, string letterOfArray){
+
+    for(int i=0; i<sizeOfArray;i++){
+
+        cout<<"Enter "<<letterOfArray<<"["<<i<<"] = ";
+
+        cin>>pointer[i];
+
+    }
+
+}
+
+
+
+void showElementsOfArray(int sizeOfArray, int * pointer, string letterOfArray){
+
+    for(int i=0;i<sizeOfArray;i++){
+
+        cout<<letterOfArray<<"["<<i<<"] = "<<pointer[i]<<endl;
+
+    }
+
+}
+
+
+
+int findMinValueOfArray(int sizeOfArray, int * pointer, string letterOfArray){
+
+    int minValue=pointer[0];
+
+    for(int i=0;i<sizeOfArray;i++){
+
+        if(pointer[i]<minValue){
+
+            minValue = pointer[i];
+
+        }
+
+    }
+
+    return minValue;
+
+}
+
+
+
+void multiplyEachMassiveElementOnMinValue(int sizeOfArray, int * pointer, int minValue){
+
+    for(int i=0;i<sizeOfArray;i++){
+
+        pointer[i] *= minValue;
+
+    }
 
 }
 
@@ -42,15 +104,15 @@ int main(){
 
     //variables
 
-    cout<<"Enter the elements number of array A(>5): ";
+    cout<<"Enter size of array A(>5): ";
 
-    int a=enterInt();
+    int a=readSizeOfArrayInt();
 
 
 
-    cout<<"Enter the elements number of array B(>5): ";
+    cout<<"Enter size of array B(>5): ";
 
-    int b=enterInt();
+    int b=readSizeOfArrayInt();
 
 
 
@@ -64,29 +126,9 @@ int main(){
 
 
 
-    for(int i=0; i<a;i++){
+    readElementOfArray(a, A, "A");
 
-        cout<<"Vvedite A["<<i<<"] = ";
-
-        cin>>A[i];
-
-    }
-
-
-
-    for(int i=0; i<b;i++){
-
-        cout<<"Vvedite B["<<i<<"] = ";
-
-        cin>>B[i];
-
-    }
-
-
-
-    int minValueA = A[0];
-
-    int minValueB = B[0];
+    readElementOfArray(b, B, "B");
 
 
 
@@ -98,63 +140,25 @@ int main(){
 
 
 
-    for(int i=0;i<a;i++){
+    showElementsOfArray(a, A, "A");
 
-        cout<<"A["<<i<<"] = "<<A[i]<<endl;
-
-    }
-
-
-
-    for(int i=0;i<b;i++){
-
-        cout<<"B["<<i<<"] = "<<B[i]<<endl;
-
-    }
+    showElementsOfArray(b, B, "B");
 
 
 
     //find min value of each massive
 
-    for(int i=0;i<a;i++){
+    int minValueA = findMinValueOfArray(a, A, "A");
 
-        if(A[i]<minValueA){
-
-            minValueA = A[i];
-
-        }
-
-    }
-
-
-
-    for(int i=0;i<b;i++){
-
-        if(B[i]<minValueB){
-
-            minValueB = B[i];
-
-        }
-
-    }
+    int minValueB = findMinValueOfArray(b, B, "B");
 
 
 
     //multiply each massive value on min value
 
-    for(int i=0;i<a;i++){
+    multiplyEachMassiveElementOnMinValue(a, A, minValueA);
 
-        A[i] *= minValueA ;
-
-    }
-
-
-
-    for(int i=0;i<b;i++){
-
-        B[i] *= minValueB ;
-
-    }
+    multiplyEachMassiveElementOnMinValue(b, B, minValueB);
 
 
 
@@ -164,19 +168,15 @@ int main(){
 
 
 
-    for(int i=0;i<a;i++){
+    showElementsOfArray(a, A, "A");
 
-        cout<<"A["<<i<<"] = "<<A[i]<<endl;
-
-    }
+    showElementsOfArray(b, B, "B");
 
 
 
-    for(int i=0;i<b;i++){
+    delete[] A;
 
-        cout<<"B["<<i<<"] = "<<B[i]<<endl;
-
-    }
+    delete[] B;
 
 
 
