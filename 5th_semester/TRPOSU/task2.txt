@@ -1,7 +1,3 @@
-/*
-Task2 
-
-*/
 #include <iostream>
 
 using namespace std;
@@ -16,13 +12,105 @@ const double E = std::exp(1.0);
 
 /*
 
-Task1
+Task2
 
-14. Заданы два массива А(5) и В(5). В каждом из массивов найти наименьшее значение и умножить на него все элементы массивов. На печать вывести исходные и преобразованные массивы.
+
+
+Пользовательский класс должен содержать необходимые элементы-данные, метод установки их начальных значений:
+
+    Void set(double X, …);
+
+    метод печати:
+
+    Void print(void);
+
+    метод, решающий поставленную задачу:
+
+    Void Run(void);
+
+Код методов – вне пространства определения класса.
+
+Программа должна включать в себя статический и динамический способы создания объектов, и для каждого объекта
+
+использовать прямую и косвенную адресацию при вызове методов класса.
 
 */
 
+class myEquation{
+
+
+
+    //variables
+
+    double x, y, z, h;
+
+
+
+    public:
+
+    myEquation(){
+
+        //cout <<"Object creasted!"<<endl;
+
+    }
+
+
+
+    void set(double X, double Y, double Z, double H){
+
+        x=X;
+
+        y=Y;
+
+        z=Z;
+
+        h=H;
+
+        cout<<"Method \"set\" finished its work."<<endl;
+
+    }
+
+    void print(){
+
+        cout << "x="<<x<<endl<<"y="<<y<<endl<<"z="<<z<<endl<<"h="<<h<<endl;
+
+        cout<<"Method \"print\" finished its work."<<endl;
+
+    }
+
+
+
+    void run(){
+
+
+
+        double answer;
+
+
+
+        answer = (pow(x, y+1)+pow(E, y-1))/(1+(x*abs(y - tan(z))))*(1+abs(y-x))+(pow(abs(y-x),2)/2)-(pow(abs(y-x),3)/3);
+
+        //cout<<"Answer should be:"<<endl<<"h="<<h<<endl;
+
+        cout<<"Result of calculations:"<<endl<<"h=";
+
+        cout.precision(5);
+
+        cout<<answer<<endl;
+
+        cout<<"Method \"run\" finished its work."<<endl;
+
+    }
+
+
+
+};
+
+
+
 int main(){
+
+
 
     //variables
 
@@ -36,19 +124,51 @@ int main(){
 
 
 
-    double answer=0.0;
+    //Прямой вызов
 
 
 
-    answer = (pow(x, y+1)+pow(E, y-1))/(1+(x*abs(y - tan(z))))*(1+abs(y-x))+(pow(abs(y-x),2)/2)-(pow(abs(y-x),3)/3);
+    myEquation myInstance;
 
-    cout<<"Answer should be:"<<endl<<"h="<<h<<endl;
 
-    cout<<"Result of calculations:"<<endl<<"h=";
 
-    cout.precision(5);
+    myInstance.set(x, y, z, h);
 
-    cout<<answer<<endl;
+    /*
+
+    myInstance.print();
+
+    myInstance.run();
+
+    */
+
+
+
+    //Косвенный вызов
+
+    myEquation *myInstance1  = &myInstance;
+
+    //myInstance1->set(x, y, z, h);
+
+    myInstance1->print();
+
+    myInstance1->run();
+
+    //count<<"x="<<myInstance->x;
+
+
+
+    /*
+
+    myEquation myInstance2;
+
+    myInstance2.set(3.0, 3.0, 3.0, 3.0);
+
+    myInstance2.print();
+
+    myInstance2.run();
+
+    */
 
 
 
