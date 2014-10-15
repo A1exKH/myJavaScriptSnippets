@@ -1,12 +1,10 @@
+#include "myEquation.h"
 #include <iostream>
+#include  <conio.h>
+#include <cmath>
+#include <math.h>
 
 using namespace std;
-
-#include  <conio.h>
-
-#include <cmath>
-
-#include <math.h>
 
 const double E = std::exp(1.0);
 
@@ -14,166 +12,76 @@ const double E = std::exp(1.0);
 
 Task2
 
-
-
 Пользовательский класс должен содержать необходимые элементы-данные, метод установки их начальных значений:
-
     Void set(double X, …);
-
     метод печати:
-
     Void print(void);
-
     метод, решающий поставленную задачу:
-
     Void Run(void);
 
 Код методов – вне пространства определения класса.
-
 Программа должна включать в себя статический и динамический способы создания объектов, и для каждого объекта
-
 использовать прямую и косвенную адресацию при вызове методов класса.
 
 */
 
-class myEquation{
 
+myEquation::myEquation(){
+    cout<<"Method \"constructor\" finished its work."<<endl;
+}
 
+void myEquation::set(double X, double Y, double Z, double H){
+    x=X;
+    y=Y;
+    z=Z;
+    h=H;
+    cout<<"Method \"set\" finished its work."<<endl;
+}
 
-    //variables
+void myEquation::print(){
+    cout << "x="<<x<<endl<<"y="<<y<<endl<<"z="<<z<<endl<<"h="<<h<<endl;
+    cout<<"Method \"print\" finished its work."<<endl;
+}
 
-    double x, y, z, h;
+void myEquation::run(){
+    double answer;
 
+    answer = (pow(x, y+1)+pow(E, y-1))/(1+(x*abs(y - tan(z))))*(1+abs(y-x))+(pow(abs(y-x),2)/2)-(pow(abs(y-x),3)/3);
 
-
-    public:
-
-    myEquation(){
-
-        //cout <<"Object creasted!"<<endl;
-
-    }
-
-
-
-    void set(double X, double Y, double Z, double H){
-
-        x=X;
-
-        y=Y;
-
-        z=Z;
-
-        h=H;
-
-        cout<<"Method \"set\" finished its work."<<endl;
-
-    }
-
-    void print(){
-
-        cout << "x="<<x<<endl<<"y="<<y<<endl<<"z="<<z<<endl<<"h="<<h<<endl;
-
-        cout<<"Method \"print\" finished its work."<<endl;
-
-    }
-
-
-
-    void run(){
-
-
-
-        double answer;
-
-
-
-        answer = (pow(x, y+1)+pow(E, y-1))/(1+(x*abs(y - tan(z))))*(1+abs(y-x))+(pow(abs(y-x),2)/2)-(pow(abs(y-x),3)/3);
-
-        //cout<<"Answer should be:"<<endl<<"h="<<h<<endl;
-
-        cout<<"Result of calculations:"<<endl<<"h=";
-
-        cout.precision(5);
-
-        cout<<answer<<endl;
-
-        cout<<"Method \"run\" finished its work."<<endl;
-
-    }
-
-
-
-};
-
-
+    //cout<<"Answer should be:"<<endl<<"h="<<h<<endl;
+    cout<<"Result of calculations:"<<endl<<"h=";
+    cout.precision(5);
+    cout<<answer<<endl;
+    cout<<"Method \"run\" finished its work."<<endl;
+}
 
 int main(){
-
-
 
     //variables
 
     double x = 2.444;
-
     double y = 0.869e-2;
-
     double z = -0.13e3;
-
     double h = -0.49871;
-
-
 
     //Прямой вызов
 
-
-
     myEquation myInstance;
-
-
-
     myInstance.set(x, y, z, h);
 
     /*
-
     myInstance.print();
-
     myInstance.run();
-
     */
-
-
 
     //Косвенный вызов
 
     myEquation *myInstance1  = &myInstance;
-
     //myInstance1->set(x, y, z, h);
-
     myInstance1->print();
-
     myInstance1->run();
-
     //count<<"x="<<myInstance->x;
 
-
-
-    /*
-
-    myEquation myInstance2;
-
-    myInstance2.set(3.0, 3.0, 3.0, 3.0);
-
-    myInstance2.print();
-
-    myInstance2.run();
-
-    */
-
-
-
     getch();
-
     return 0;
-
 }
