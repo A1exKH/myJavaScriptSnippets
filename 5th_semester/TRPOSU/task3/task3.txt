@@ -1,4 +1,78 @@
+#include "myEquation.h"
+#include <iostream>
+#include  <conio.h>
+#include <cmath>
+#include <math.h>
+
+using namespace std;
+
+const double E = std::exp(1.0);
+
 /*
-Task3 
+
+Task3
+
+Общая постановка. Пользовательский класс Х должен содержать необходимые элементы-данные, которые создаются в динамической области памяти.
+Конструктор для их создания (операция new) и установки их начальных значений: Х();
+
+деструктор: ~Х();
+
+friend – функция печати: friend void print();
+
+функция, решающая поставленную задачу: friend Void Run().
+
+Код методов и функций – вне пространства определения класса.
 
 */
+
+myEquation::~myEquation(){
+    cout<<"Destructor finished its work."<<endl;
+}
+
+myEquation::myEquation(double X, double Y, double Z, double H){
+        x=X;
+        y=Y;
+        z=Z;
+        h=H;
+
+        cout<<"Method \"constructor\" finished its work."<<endl;
+}
+
+void myEquation::print(){
+        cout << "x="<<x<<endl<<"y="<<y<<endl<<"z="<<z<<endl<<"h="<<h<<endl;
+        cout<<"Method \"print\" finished its work."<<endl;
+}
+
+void myEquation::run(){
+    double answer;
+
+    answer = (pow(x, y+1)+pow(E, y-1))/(1+(x*abs(y - tan(z))))*(1+abs(y-x))+(pow(abs(y-x),2)/2)-(pow(abs(y-x),3)/3);
+
+    //cout<<"Answer should be:"<<endl<<"h="<<h<<endl;
+    cout<<"Result of calculations:"<<endl<<"h=";
+    cout.precision(5);
+    cout<<answer<<endl;
+    cout<<"Method \"run\" finished its work."<<endl;
+}
+
+int main(){
+
+    //variables
+
+    double x = 2.444;
+    double y = 0.869e-2;
+    double z = -0.13e3;
+    double h = -0.49871;
+
+    myEquation myInstance = myEquation(x, y, z, h);
+
+    myInstance.~myEquation();
+
+    //myInstance->set(x, y, z, h);
+    myInstance.print();
+    myInstance.run();
+    //count<<"x="<<myInstance->x;
+
+    getch();
+    return 0;
+}
