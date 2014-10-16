@@ -1,22 +1,17 @@
-#pragma once /* Защита от двойного подключения заголовочного файла */
 class myString{
+private:
+    char *m_Str; // указатель на строку с нулём на коце
+    int L; // указатель на размер строки
+    void New( const char *str ); // выделение памяти
+    void Del(); // удаление памяти
 
-    //variables
-    char *str;
-    char *str_return;
-
-    public:
-
+public:
+    myString(); // конструктор по умолчанию
+    explicit myString(const myString &str); // конструктор копирования
+    myString( const char * str ); // дополнительный конструктор
     ~myString();
-    myString();
     void Set();
-    void print(myString&);
-    char* run(myString&);
-    void ofile(char *str, myString& object);
-
-   // myString & operator=(const char *str );
-
-    char* New( char *str );
-
+    void Print();
+    void ofile(char *str);
+    myString & operator=( const myString & str );
 };
-
