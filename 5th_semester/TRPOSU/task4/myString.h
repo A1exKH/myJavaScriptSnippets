@@ -5,19 +5,18 @@ class myString{
     char *str;
     char *str_return;
 
-    private:
-
-    friend void print(myString&);
-
-    friend char* run(myString&);
-
     public:
 
     ~myString();
-
     myString();
+    void Set();
+    void print(myString&);
+    char* run(myString&);
+    void ofile(char *str, myString& object);
 
-    void Set(char*);
+   // myString & operator=(const char *str );
+
+    char* New( char *str );
 
 };
 

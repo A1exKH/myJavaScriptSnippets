@@ -1,13 +1,11 @@
 #include "myString.h"
 #include <iostream>
-#include <conio.h>
 #include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <fstream>
 
 using namespace std;
 
-#define SIZE 255 //длина строки по умолчанию
+#define SIZE 1000 //длина строки по умолчанию
 
 /*
 Task4
@@ -36,7 +34,7 @@ Task4
 myString::~myString(){
     delete[] str;
     cout<<"Destructor finished its work."<<endl;
-    getch();
+    getchar();
 }
 
 myString::myString(){
@@ -47,7 +45,13 @@ myString::myString(){
     //cout<<"Method \"constructor\" finished its work."<<endl;
 }
 
-void myString::Set(char* s){
+void myString::Set(){
+
+    char s[SIZE];
+
+    cout<<"Type anything and press \"Enter\":"<<endl;
+    cin.getline(s,SIZE); //считываем полностью всю строку
+
     int i;
     for (i=0;i<strlen(s);i++){
         str[i]=s[i];
@@ -55,11 +59,30 @@ void myString::Set(char* s){
     str[i]='\0';
 };
 
-void print(myString& object){
+void myString::ofile(char *str, myString& object){
+  ofstream file;
+  file.open(str,ios::app);
+  file<<object.str<<endl;
+  file.close();
+}
+
+/*
+char* myString::New( char *str ){
+    int size = strlen(str);
+    char* m_Str = new char[size+1]; // массив для строки символов
+    strcpy(m_Str, str); // копируем строку
+    return m_Str;
+}
+
+myString & myString::operator =(const char *str){
+    return  New(str);
+};
+*/
+void myString::print(myString& object){
     cout<<"Your string:"<<endl<<object.str<<" "<<object.str_return<<endl;
 }
 
-char* run(myString& object){
+char* myString::run(myString& object){
     int j=0;
     int position=0;
     int i;
@@ -83,20 +106,17 @@ char* run(myString& object){
 
 int main(){
 
-    char s[265];
-
-    cout<<"Type anything and press \"Enter\":"<<endl;
-    cin.getline(s,256); //считываем полностью всю строку
-
-    myString *s1;
+    myString *s1, *s2;
     s1 = new myString();
-    s1->Set(s);
+    s1->Set();
+    s1->print(*s1);
+    //cout<<"String after method \"run\":"<<endl<<s1->run(*s1)<<endl;
 
-    print(*s1);
+    char fileName1[]="s1.txt";
 
-    cout<<run(*s1)<<endl;
+    s1->ofile(fileName1,*s1);
     s1->~myString();
 
-    getch();
+    getchar();
     return 0;
 }
