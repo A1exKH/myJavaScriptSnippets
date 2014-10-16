@@ -1,4 +1,102 @@
+#include "myString.h"
+#include <iostream>
+#include <conio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+using namespace std;
+
+#define SIZE 255 //длина строки по умолчанию
+
 /*
-Task4 
+Task4
 14. Длина L кратна 4-м, то выделяется подстрока после последнего пробела;
+
+Общая постановка. Пользовательский класс String должен содержать необходимые элементы-данные, которые
+создаются в динамической области памяти.
+
+Конструктор для создания строк: String (…);
+
+Деструктор: ~String();
+
+Метод ввода исходной строки: Set();
+
+Метод печати: void print(…);
+
+Код методов  – вне пространства определения класса. Программа иллюстрирует прямой и косвенный способы
+обращения к методам.
+
+Ввести с клавиатуры строку  символов S1. Признак окончания ввода строки - нажатие клавиши "Ввод". Программа
+должна содержать перегруженную операцию «=», использование которой скопирует S1 в S2 .
+
+Исходную и преобразованную строки вывести в файл.
 */
+
+myString::~myString(){
+    delete[] str;
+    cout<<"Destructor finished its work."<<endl;
+    getch();
+}
+
+myString::myString(){
+    str=new char[SIZE];
+    str[0]='\0';
+    str_return=new char[SIZE];
+    str_return[0]='\0';
+    //cout<<"Method \"constructor\" finished its work."<<endl;
+}
+
+void myString::Set(char* s){
+    int i;
+    for (i=0;i<strlen(s);i++){
+        str[i]=s[i];
+    }
+    str[i]='\0';
+};
+
+void print(myString& object){
+    cout<<"Your string:"<<endl<<object.str<<" "<<object.str_return<<endl;
+}
+
+char* run(myString& object){
+    int j=0;
+    int position=0;
+    int i;
+    if (strlen(object.str)%4==0) {
+        for (i=strlen(object.str);i!=0;i--){
+            if((int)object.str[i]==32) {
+                position=++i;
+                break;
+            }
+        }
+        for (i=position;i<strlen(object.str);i++){
+            object.str_return[j]=object.str[i];
+            j++;
+        }
+        object.str_return[j]='\0';
+    }
+    else strcpy(object.str_return,object.str);
+
+    return object.str_return;
+}
+
+int main(){
+
+    char s[265];
+
+    cout<<"Type anything and press \"Enter\":"<<endl;
+    cin.getline(s,256); //считываем полностью всю строку
+
+    myString *s1;
+    s1 = new myString();
+    s1->Set(s);
+
+    print(*s1);
+
+    cout<<run(*s1)<<endl;
+    s1->~myString();
+
+    getch();
+    return 0;
+}
