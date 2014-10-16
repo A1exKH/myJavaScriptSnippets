@@ -12,7 +12,8 @@ const double E = std::exp(1.0);
 
 Task3
 
-Общая постановка. Пользовательский класс Х должен содержать необходимые элементы-данные, которые создаются в динамической области памяти.
+Общая постановка. Пользовательский класс Х должен содержать необходимые элементы-данные, которые создаются в
+динамической области памяти.
 Конструктор для их создания (операция new) и установки их начальных значений: Х();
 
 деструктор: ~Х();
@@ -27,6 +28,7 @@ friend – функция печати: friend void print();
 
 myEquation::~myEquation(){
     cout<<"Destructor finished its work."<<endl;
+    getch();
 }
 
 myEquation::myEquation(double X, double Y, double Z, double H){
@@ -38,21 +40,21 @@ myEquation::myEquation(double X, double Y, double Z, double H){
         cout<<"Method \"constructor\" finished its work."<<endl;
 }
 
-void myEquation::print(){
-        cout << "x="<<x<<endl<<"y="<<y<<endl<<"z="<<z<<endl<<"h="<<h<<endl;
-        cout<<"Method \"print\" finished its work."<<endl;
+void print(myEquation& object){
+        cout << "x="<<object.x<<endl<<"y="<<object.y<<endl<<"z="<<object.z<<endl<<"h="<<object.h<<endl;
+        cout<<"Friend function \"print\" finished its work."<<endl;
 }
 
-void myEquation::run(){
+void run(myEquation& object){
     double answer;
 
-    answer = (pow(x, y+1)+pow(E, y-1))/(1+(x*abs(y - tan(z))))*(1+abs(y-x))+(pow(abs(y-x),2)/2)-(pow(abs(y-x),3)/3);
+    answer = (pow(object.x, object.y+1)+pow(E, object.y-1))/(1+(object.x*abs(object.y - tan(object.z))))*(1+abs(object.y-object.x))+(pow(abs(object.y-object.x),2)/2)-(pow(abs(object.y-object.x),3)/3);
 
     //cout<<"Answer should be:"<<endl<<"h="<<h<<endl;
     cout<<"Result of calculations:"<<endl<<"h=";
     cout.precision(5);
     cout<<answer<<endl;
-    cout<<"Method \"run\" finished its work."<<endl;
+    cout<<"Friend function \"run\" finished its work."<<endl;
 }
 
 int main(){
@@ -66,12 +68,11 @@ int main(){
 
     myEquation myInstance = myEquation(x, y, z, h);
 
-    myInstance.~myEquation();
+    //myInstance.~myEquation();
 
-    //myInstance->set(x, y, z, h);
-    myInstance.print();
-    myInstance.run();
-    //count<<"x="<<myInstance->x;
+    print(myInstance);
+    run(myInstance);
+
 
     getch();
     return 0;

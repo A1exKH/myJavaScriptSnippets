@@ -2,18 +2,18 @@
 class myEquation{
 
     //variables
-
+    private:
     double x, y, z, h;
+
+    friend void print(myEquation&);
+
+    friend void run(myEquation&);
 
     public:
 
     ~myEquation();
 
     myEquation(double, double, double, double);
-
-    void print();
-
-    void run();
 
 };
 
