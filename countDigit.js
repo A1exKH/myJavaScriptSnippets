@@ -1,13 +1,9 @@
 function countDigit(digit, range){
-
-if(Number.isInteger(range)===false){
-	var tmp = parseInt(range);
-	range = tmp;
-}
+var start = new Date().getTime();
 
 var counter=0;
 
-	for(i=range; i!=0; i--){
+	for(i=digit; i<=range; i++){
 		var str=i.toString();
 		var res=str.search(digit.toString());
 
@@ -17,6 +13,11 @@ var counter=0;
 		}
 
 	}
-console.log(counter);
+console.log("Digit "+digit+" appears in a range from 1 to "+range+": "+counter+" times.");
+var end = new Date().getTime();
+var time = end - start;
+console.log('Execution time: ' + time+"ms.");
 }
+
+countDigit(5, 1000000); //test
 
